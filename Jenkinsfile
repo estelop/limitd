@@ -1,10 +1,10 @@
 pipeline {
     agent any
     tools {
-        nodejs 'node-v7.9.0'
+        nodejs 'node-v6.10.2'
     }
     stages {
-        stage('Build') {
+        stage('Install Dependencies') {
             steps {
                 sh 'npm install'
             }
