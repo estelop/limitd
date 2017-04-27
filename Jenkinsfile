@@ -1,7 +1,7 @@
 pipeline {
     agent any
     tools {
-        nodejs 'node-v6.10.2'
+        nodejs 'node-v4.4.4'
     }
     stages {
         stage('Install Dependencies') {
@@ -16,7 +16,9 @@ pipeline {
         }
         stage('Bundle') {
             steps {
-                zip zipFile: "bundle.zip", archive: true
+                sh "export VERSION_NUMBER=0.0.0 && export WORKSPACE=. && make"
+                sh "mv limitd_0.0.0_amd64.deb ${params.bundle_file}"
+                archiveArtifacts "${params.bundle_file}"
             }
         }
     }
